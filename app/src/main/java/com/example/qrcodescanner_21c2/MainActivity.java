@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         startActivity(mapsIntent);
 
                     }
-                        //jika qrcode ada/ditemukan datanya
+                        //jika qrcode ada/ditemukan datanya ya
                         try {
                             //Konversi datanya ke json
                             JSONObject obj = new JSONObject(result.getContents());
