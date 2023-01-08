@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //jika qrcode tidak ada sama sekali
             if (result.getContents() == null) {
                 Toast.makeText(this, "Hasil SCANNING tidak ada", Toast.LENGTH_LONG).show();
-
+                //jika qrcode ada/ditemukan datanya
             } else {
                 //jika QRCode ada atau ditemukan data
                 //1.Logika jika data yang masuk url http://...
@@ -125,20 +125,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     double latitude = Double.parseDouble(geoLocation[0]);
                     double longitude = Double.parseDouble(geoLocation[1]);
                     }
-                        //jika qrcode ada/ditemukan datanya
-                        try {
-                            //Konversi datanya ke json
-                            JSONObject obj = new JSONObject(result.getContents());
-                            //di set nilai datanya ke textview
-                            textViewNama.setText(obj.getString("Nama"));
-                            textViewKelas.setText(obj.getString("Kelas"));
-                            textViewNIM.setText(obj.getString("NIM"));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
-                        }
+                //4.Logika Membuka Koordinat Maps
+
+                String uriMaps = result.getContents();
+                String maps = "http://maps.google.com/maps?q=loc:" + uriMaps;
+                String testDoubleData1 = ",";
+                String testDoubleData2 = ".";
+
+                boolean b = uriMaps.contains(testDoubleData1) && uriMaps.contains(testDoubleData2);
+                if (b) {
+                    Intent mapsIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(maps));
+                    mapsIntent.setPackage("com.google.android.apps.maps");
+                    startActivity(mapsIntent);
+                }
+                try {
+                    //Konversi datanya ke json
+                    JSONObject obj = new JSONObject(result.getContents());
+                    //di set nilai datanya ke textview
+                    textViewNama.setText(obj.getString("nama"));
+                    textViewKelas.setText(obj.getString("kelas"));
+                    textViewNIM.setText(obj.getString("nim"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+
+
+                    Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
+                }
                     }
-                } else {
+                }else {
                     super.onActivityResult(requestCode, resultCode, data);
                 }
             }
