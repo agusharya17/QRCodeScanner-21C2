@@ -39,6 +39,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         // View Object
         buttonScan = (Button) findViewById(R.id.buttonScan);
+        ImageButton imageButton1 = (ImageButton) findViewById(R.id.imageButton1);
+        ImageButton imageButton2 = (ImageButton) findViewById(R.id.imageButton2);
+        ImageButton imageButton3 = (ImageButton) findViewById(R.id.imageButton3);
+        ImageButton imageButton4 = (ImageButton) findViewById(R.id.imageButton4);
+
         textViewNama = (TextView) findViewById(R.id.textViewNama);
         textViewKelas = (TextView) findViewById(R.id.textViewKelas);
         textViewNIM = (TextView) findViewById(R.id.textViewNIM);
@@ -48,6 +53,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //implementasi onclick listener
         buttonScan.setOnClickListener(this);
+        imageButton1.setOnClickListener(this);
+        imageButton2.setOnClickListener(this);
+        imageButton3.setOnClickListener(this);
+        imageButton4.setOnClickListener(this);
+
         // Meminta izin untuk mengakses panggilan telepon
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CALL_PHONE}, 1);
