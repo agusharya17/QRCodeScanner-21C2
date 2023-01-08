@@ -86,12 +86,14 @@
             android:textAlignment="center"></TextView>
 
         <TextView
+            android:id="@+id/textViewEmail"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:text="Email"
             android:textAlignment="center"></TextView>
 
         <TextView
+            android:id="@+id/textViewWebsite"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:text="Website"
@@ -107,12 +109,16 @@
         android:layout_marginStart="35dp"
         android:layout_marginEnd="35dp"
         android:layout_marginBottom="200dp">
-        <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+
+        <ImageButton
+            android:id="@+id/imageButton1"
+            style="@android:style/Widget.ImageButton"
+            android:layout_width="70dp"
+            android:layout_height="60dp"
+            android:onClick="Map"
             android:layout_weight="1"
-            app:srcCompat="@drawable/map" />
+            app:srcCompat="@drawable/map"
+            tools:ignore="DuplicateIds,DuplicateSpeakableTextCheck"/>
     </LinearLayout>
 
     <LinearLayout
@@ -125,12 +131,15 @@
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="200dp">
 
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="36dp"
-            android:layout_height="wrap_content"
+        <ImageButton
+            android:id="@+id/imageButton2"
+            style="@android:style/Widget.ImageButton"
+            android:layout_width="70dp"
+            android:layout_height="60dp"
+            android:onClick="Kontak"
             android:layout_weight="1"
-            app:srcCompat="@drawable/kontak" />
+            app:srcCompat="@drawable/call"
+            tools:ignore="DuplicateIds,DuplicateSpeakableTextCheck"/>
     </LinearLayout>
 
     <LinearLayout
@@ -143,12 +152,15 @@
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="200dp">
 
-        <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageButton
+            android:id="@+id/imageButton3"
+            style="@android:style/Widget.ImageButton"
+            android:layout_width="70dp"
+            android:layout_height="60dp"
+            android:onClick="Email"
             android:layout_weight="1"
-            app:srcCompat="@drawable/mail" />
+            app:srcCompat="@drawable/mail"
+            tools:ignore="DuplicatIds,DuplicateSpeakableTextCheck"/>
     </LinearLayout>
 
     <LinearLayout
@@ -161,12 +173,14 @@
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="200dp">
 
-        <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:layout_width="70dp"
+            android:layout_height="60dp"
+            android:onClick="Website"
+            app:srcCompat="@drawable/web_view"
             android:layout_weight="1"
-            app:srcCompat="@drawable/web_view" />
+            tools:ignore="DuplicateIds,DuplicateSpeakableTextCheck"/>
     </LinearLayout>
 
     <LinearLayout
@@ -208,13 +222,5 @@
             android:textAlignment="center"
             android:text="Berbagai macam Kode QR seperti Map, Kontak, Email, Website, dll dimungkinkan dapat di- Scan melalui Aplikasi ini.  @agusharya_developer" />
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="100px"
-        android:layout_height="200px"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginBottom="100dp" />
 
 </RelativeLayout>

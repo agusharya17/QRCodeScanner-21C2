@@ -2,6 +2,7 @@ package com.example.qrcodescanner_21c2;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -12,6 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.widget.AppCompatToggleButton;
+
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -43,11 +48,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //implementasi onclick listener
         buttonScan.setOnClickListener(this);
-    }
-
+        // Meminta izin untuk mengakses panggilan telepon
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CALL_PHONE}, 1);
+        }
+}
     //untuk hasil scanning
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             //jika qrcode tidak ada sama sekali
@@ -81,9 +89,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(Intent.createChooser(intent, "Send mail"));
                 }
                 //3. Logika jika Nomor Telepon ada untuk persiapan Telepon
+                try {
+                    Intent intent2 = new Intent(Intent.ACTION_CALL, Uri.parse(result.getContents()));
+                    startActivity(intent2);
+                } catch (Exception e2) {
+                    Toast.makeText(this, "Not Scanned", Toast.LENGTH_LONG).show();
+                }
                 String number;
                 number = result.getContents();
-
                 if (number.matches("^[0-9,+]*$") && number.length() > 10) {
                     Intent callIntent = new Intent(Intent.ACTION_DIAL);
                     Intent dialIntent = new Intent(Intent.ACTION_CALL);
@@ -93,20 +106,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(callIntent);
                     startActivity(dialIntent);
                 }
+
                 // 4. Maps
-                    String uriMaps = result.getContents();
-                    String maps = "https://maps.google.com?q=loc:" + uriMaps;
-                    String testDoubleData1 = ",";
-                    String testDoubleData2 = ",";
-
-                    boolean b = uriMaps.contains(testDoubleData1) && uriMaps.contains(testDoubleData2);
-                    if (b) {
-                        Intent mapsIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(maps));
-                        mapsIntent.setPackage("com.google.android.apps.maps");
-                        startActivity(mapsIntent);
-
+                // Mengecek apakah data yang di scan merupakan lokasi
+                if (result.getContents().contains("geo:")) {
+                // Memisahkan latitude dan longitude dari data yang di scan
+                    String[] geoLocation = result.getContents().split(":")[1].split("\\?")[0].split(",");
+                    double latitude = Double.parseDouble(geoLocation[0]);
+                    double longitude = Double.parseDouble(geoLocation[1]);
                     }
-                        //jika qrcode ada/ditemukan datanya ya
+                        //jika qrcode ada/ditemukan datanya
                         try {
                             //Konversi datanya ke json
                             JSONObject obj = new JSONObject(result.getContents());
