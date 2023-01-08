@@ -8,7 +8,7 @@ Screenshootnya =
 =======================
 a. Code Source:
 - Main Activity
-Dalam Main activity terdapat code source yang meliputi 3 Fungsi JSON, Call atau Telepon serta WEb View dan Map.
+Dalam Main activity terdapat code source yang meliputi 4 Fungsi JSON, Call atau Telepon serta WEb View dan Map.
 ![image](https://user-images.githubusercontent.com/31887335/209883359-3995c21d-60e8-4b0f-852f-e95394bbcaf7.png)
 ![image](https://user-images.githubusercontent.com/31887335/209883474-ddd6d126-865e-4347-810c-c33715196d71.png)
 ![image](https://user-images.githubusercontent.com/31887335/209883509-ad10fbf3-094e-45ef-812a-5c74dc58d1d1.png)
